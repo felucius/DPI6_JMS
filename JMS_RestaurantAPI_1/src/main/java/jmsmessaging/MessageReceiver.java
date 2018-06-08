@@ -37,7 +37,7 @@ public class MessageReceiver {
             /*
             Listen to the queue FromBrokerToBank which is in our case the Broker.
             */
-            properties.put(("queue.FromBrokerToRestaurant"), "FromBrokerToRestaurant");
+            properties.put(("queue.FromBrokerToRestaurantAPI1"), "FromBrokerToRestaurantAPI1");
 
             /*
             Creating a connection factory.
@@ -55,7 +55,7 @@ public class MessageReceiver {
             Setting the destination to listen to. In our case the Broker or 
             FromBrokerToBank.
             */
-            destination = (Destination) jndiContext.lookup("FromBrokerToRestaurant");
+            destination = (Destination) jndiContext.lookup("FromBrokerToRestaurantAPI1");
             consumer = session.createConsumer(destination);
 
             connection.start();

@@ -11,7 +11,7 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 import messaging.ClientMessageListener;
 import messaging.RestaurantMessageListener;
-import model.jms.MessageReceiverGateway;
+import jms.MessageReceiverGateway;
 
 /**
  *
@@ -41,12 +41,24 @@ public class init {
         reservationRequestService.insertReservation(reservationRequest);
         reservationReplyService.insertReservationReply(reservationReply);
          */
-        connectToRestaurant();
+        connectToRestaurantAPI1();
+        connectToRestaurantAPI2();
+        connectToRestaurantAPI3();
         connectToClient();
     }
 
-    public void connectToRestaurant() {
-        MessageReceiverGateway restaurantToBrokerReceiver = new MessageReceiverGateway("FromRestaurantToBroker");
+    public void connectToRestaurantAPI1() {
+        MessageReceiverGateway restaurantToBrokerReceiver = new MessageReceiverGateway("FromRestaurantToBrokerAPI1");
+        restaurantToBrokerReceiver.setListener(new RestaurantMessageListener());
+    }
+
+    public void connectToRestaurantAPI2() {
+        MessageReceiverGateway restaurantToBrokerReceiver = new MessageReceiverGateway("FromRestaurantToBrokerAPI2");
+        restaurantToBrokerReceiver.setListener(new RestaurantMessageListener());
+    }
+
+    public void connectToRestaurantAPI3() {
+        MessageReceiverGateway restaurantToBrokerReceiver = new MessageReceiverGateway("FromRestaurantToBrokerAPI3");
         restaurantToBrokerReceiver.setListener(new RestaurantMessageListener());
     }
 

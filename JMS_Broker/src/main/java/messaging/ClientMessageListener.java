@@ -9,7 +9,7 @@ import java.net.URL;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
-import model.jms.MessageSenderGateway;
+import jms.MessageSenderGateway;
 import domain.ReservationRequest;
 
 /*
@@ -18,7 +18,7 @@ This class listens to the messages received from the client application.
 public class ClientMessageListener implements MessageListener {
 
     private ReservationRequestReply reservationValuePair;
-    
+
     public ClientMessageListener() {
 
     }
@@ -31,10 +31,20 @@ public class ClientMessageListener implements MessageListener {
             ReservationRequest reservationRequest = new Gson().fromJson(message.getText(), ReservationRequest.class);
             //frame.add(restaurantRequest);
 
-            MessageSenderGateway messageSenderGateway = new MessageSenderGateway("FromBrokerToRestaurant");
+            MessageSenderGateway messageSenderGatewayAPI1 = new MessageSenderGateway("FromBrokerToRestaurantAPI1");
+            MessageSenderGateway messageSenderGatewayAPI2 = new MessageSenderGateway("FromBrokerToRestaurantAPI2");
+            MessageSenderGateway messageSenderGatewayAPI3 = new MessageSenderGateway("FromBrokerToRestaurantAPI3");
 
-            messageSenderGateway.sendRequestToRestaurant(reservationRequest);
-            addReservationRequest(reservationRequest);
+            if (reservationRequest.getRestaurantName().equals("Alesandro Pizza & Pasta")) {
+                messageSenderGatewayAPI1.sendRequestToRestaurant(reservationRequest);
+                addReservationRequest(reservationRequest);
+            } else if (reservationRequest.getRestaurantName().equals("Tokyo Sushi and Wok")) {
+                messageSenderGatewayAPI2.sendRequestToRestaurant(reservationRequest);
+                addReservationRequest(reservationRequest);
+            } else if (reservationRequest.getRestaurantName().equals("Greek specialities")) {
+                messageSenderGatewayAPI3.sendRequestToRestaurant(reservationRequest);
+                addReservationRequest(reservationRequest);
+            }
 
             System.out.println("Broker: Client request received: " + reservationRequest.getName()
                     + " amount of seats: " + reservationRequest.getAmountOfSeats()

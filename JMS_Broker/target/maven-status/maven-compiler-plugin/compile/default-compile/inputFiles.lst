@@ -4,11 +4,11 @@ C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\dao\ReservationRequestReplyIm
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\messaging\RequestReply.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\domain\Restaurant.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\rest\JAXRSconfig.java
+C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\jms\MessageReceiverGateway.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\messaging\RestaurantMessageListener.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\service\ReservationRequestService.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\rest\RestaurantRest.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\messaging\ReservationValuePair.java
-C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\model\jms\MessageReceiverGateway.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\rest\ReservationRequestRest.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\service\ReservationRequestReplyService.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\dao\ReservationReplyDAO.java
@@ -20,9 +20,9 @@ C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\rest\ReservationReplyRest.jav
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\dao\RestaurantDAO.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\service\RestaurantService.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\domain\ReservationRequest.java
+C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\jms\MessageSenderGateway.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\dao\ReservationRequestDAO.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\domain\ReservationReply.java
-C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\model\jms\MessageSenderGateway.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\dao\ReservationRequestDAOImpl.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\dao\ReservationRequestReplyDAO.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Broker\src\main\java\messaging\ClientMessageListener.java

@@ -39,7 +39,7 @@ public class MessageSender {
             /*
             Sends message to the queue BankToBroker.
              */
-            properties.put(("queue.FromRestaurantToBroker"), "FromRestaurantToBroker");
+            properties.put(("queue.FromRestaurantToBrokerAPI1"), "FromRestaurantToBrokerAPI1");
 
             /*
             Creating a connection factory.
@@ -57,7 +57,7 @@ public class MessageSender {
             Setting the destination to send the message. In our case the Broker
             or BankToBRoker.
              */
-            destination = (Destination) jndiContext.lookup("FromRestaurantToBroker");
+            destination = (Destination) jndiContext.lookup("FromRestaurantToBrokerAPI1");
             producer = session.createProducer(destination);
 
         } catch (NamingException | JMSException ex) {

@@ -1,5 +1,5 @@
-model\jms\MessageReceiverGateway.class
 service\init.class
+jms\MessageSenderGateway.class
 dao\ReservationRequestDAOImpl.class
 domain\ReservationReply.class
 service\ReservationReplyService.class
@@ -18,11 +18,11 @@ rest\JAXRSconfig.class
 domain\ReservationRequest.class
 messaging\ClientMessageListener.class
 dao\ReservationRequestDAO.class
-model\jms\MessageSenderGateway.class
 messaging\RequestReply.class
 dao\ReservationRequestReplyImpl.class
 messaging\ReservationValuePair.class
 dao\RestaurantDAO.class
 rest\RestaurantRest.class
 service\RestaurantService.class
+jms\MessageReceiverGateway.class
 messaging\RestaurantMessageListener.class

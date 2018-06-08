@@ -17,7 +17,7 @@ import java.util.List;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
-import model.jms.MessageSenderGateway;
+import jms.MessageSenderGateway;
 import domain.ReservationReply;
 
 /**
