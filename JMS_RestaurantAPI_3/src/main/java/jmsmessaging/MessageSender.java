@@ -78,8 +78,8 @@ public class MessageSender {
             //message.setJMSCorrelationID(correlationId);
             producer.send(message);
 
-            session.close();
-            connection.close();
+            //session.close();
+            //connection.close();
         } catch (JMSException ex) {
             ex.printStackTrace();
         }
@@ -90,8 +90,8 @@ public class MessageSender {
             Message message = session.createTextMessage(new Gson().toJson(restaurant));
             producer.send(message);
 
-            session.close();
-            connection.close();
+            //session.close();
+            //connection.close();
         } catch (JMSException ex) {
             ex.printStackTrace();
         }
@@ -102,8 +102,8 @@ public class MessageSender {
             Message message = session.createTextMessage(new Gson().toJson(reservationValuePair));
             producer.send(message);
 
-            session.close();
-            connection.close();
+            //session.close();
+            //connection.close();
         } catch (JMSException ex) {
             ex.printStackTrace();
         }
