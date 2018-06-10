@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import messaging.ClientMessageListener;
 import messaging.RestaurantMessageListener;
 import jms.MessageReceiverGateway;
+import monitoring.Parser;
 
 /**
  *
@@ -45,6 +46,7 @@ public class init {
         connectToRestaurantAPI2();
         connectToRestaurantAPI3();
         connectToClient();
+        connectToMonitor();
     }
 
     public void connectToRestaurantAPI1() {
@@ -65,5 +67,9 @@ public class init {
     public void connectToClient() {
         MessageReceiverGateway clientToBrokerReceiver = new MessageReceiverGateway("FromReservationClientToBroker");
         clientToBrokerReceiver.setListener(new ClientMessageListener());
+    }
+    
+    public void connectToMonitor() {
+        Parser monitorParser = new Parser();
     }
 }

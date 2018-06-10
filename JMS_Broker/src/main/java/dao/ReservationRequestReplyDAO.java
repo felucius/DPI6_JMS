@@ -7,7 +7,7 @@ package dao;
 
 import java.util.List;
 import javax.persistence.PersistenceException;
-import messaging.ReservationRequestReply;
+import domain.ReservationRequestReply;
 
 /**
  *

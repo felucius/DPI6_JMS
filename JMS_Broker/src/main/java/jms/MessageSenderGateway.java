@@ -20,7 +20,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import domain.ReservationReply;
-import messaging.ReservationRequestReply;
+import domain.ReservationRequestReply;
 import messaging.ReservationValuePair;
 
 /**

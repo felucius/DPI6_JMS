@@ -1,5 +1,6 @@
 package messaging;
 
+import domain.ReservationRequestReply;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

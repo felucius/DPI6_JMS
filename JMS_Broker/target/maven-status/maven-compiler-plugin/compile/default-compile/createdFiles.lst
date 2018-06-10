@@ -1,3 +1,5 @@
+monitoring\Parser.class
+monitoring\Stats.class
 service\init.class
 jms\MessageSenderGateway.class
 dao\ReservationRequestDAOImpl.class
@@ -11,14 +13,16 @@ dao\ReservationReplyDAO.class
 domain\Restaurant.class
 rest\ReservationRequestReplyRest.class
 rest\ReservationReplyRest.class
-messaging\ReservationRequestReply.class
+monitoring\Queues.class
 service\ReservationRequestReplyService.class
 rest\ReservationRequestRest.class
 rest\JAXRSconfig.class
 domain\ReservationRequest.class
 messaging\ClientMessageListener.class
+monitoring\Feed.class
+domain\ReservationRequestReply.class
 dao\ReservationRequestDAO.class
-messaging\RequestReply.class
+monitoring\Queue.class
 dao\ReservationRequestReplyImpl.class
 messaging\ReservationValuePair.class
 dao\RestaurantDAO.class
