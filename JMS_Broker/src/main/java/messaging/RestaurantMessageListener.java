@@ -5,6 +5,7 @@
  */
 package messaging;
 
+import domain.ReservationValuePair;
 import com.google.gson.Gson;
 import domain.Restaurant;
 import java.io.BufferedReader;
@@ -17,7 +18,7 @@ import java.util.List;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
-import jms.MessageSenderGateway;
+import gateway.MessageSenderGateway;
 import domain.ReservationReply;
 
 /**
@@ -35,23 +36,22 @@ public class RestaurantMessageListener implements MessageListener {
     @Override
     public void onMessage(Message msg) {
         try {
-
             TextMessage message = (TextMessage) msg;
             Restaurant restaurantInfo = new Gson().fromJson(message.getText(), Restaurant.class);
-            //ReservationReply reservationReply = new Gson().fromJson(message.getText(), ReservationReply.class);
 
             ReservationValuePair reservationValuePair = new Gson().fromJson(message.getText(), ReservationValuePair.class);
             MessageSenderGateway messageSenderGateway = new MessageSenderGateway("FromBrokerToReservationClient");
-
 
             if (reservationValuePair.getReply() != null) {
 
                 //addReservationReply(reply);
                 addReservationValuePairToDB(reservationValuePair);
 
-                messageSenderGateway.sendToClient(reservationValuePair);//, message.getJMSCorrelationID());
+                messageSenderGateway.sendToClient(reservationValuePair);
+                System.out.println("-------------------------------------------");
                 System.out.println("Broker: Reply from restaurant: " + reservationValuePair.getReply().getAnswer()
                         + " time:" + reservationValuePair.getReply().getTime());
+                System.out.println("-------------------------------------------");
             } else {
                 Restaurant restaurant = new Restaurant(restaurantInfo.getName(),
                         restaurantInfo.getLocation(),
@@ -62,19 +62,18 @@ public class RestaurantMessageListener implements MessageListener {
                     messageSenderGateway.sendRestaurantToClient(restaurant);
                     addRestaurant(restaurant);
 
+                    System.out.println("-------------------------------------------");
                     System.out.println("Broker: Restaurant info received: " + restaurant.getName()
                             + " location: " + restaurant.getLocation()
                             + " seats: " + restaurant.getAmountOfSeats());
                     System.out.println("Broker: Sending restaurant info to connected client application.");
+                    System.out.println("-------------------------------------------");
                 } else {
+                    System.out.println("-------------------------------------------");
                     System.out.println("Broker: Restaurant already exists " + restaurant.getName());
+                    System.out.println("-------------------------------------------");
                 }
             }
-
-            //BrokerToClient sender = new BrokerToClient(frame);
-            //LoanReply reply = new LoanReply(bankInterestReply.getInterest(), bankInterestReply.getQuoteId());
-            //sender.sendToClient(reply, message.getJMSCorrelationID());
-            //frame.add(request, bankInterestReply);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -82,7 +81,6 @@ public class RestaurantMessageListener implements MessageListener {
 
     public void addRestaurant(Restaurant restaurant) {
         try {
-
             String url = "http://localhost:22603/JMS_Broker/api/restaurants";
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -102,11 +100,9 @@ public class RestaurantMessageListener implements MessageListener {
             wr.flush();
             wr.close();
 
-            int responseCode = con.getResponseCode();
-            //System.out.println("\nSending 'POST' request to URL : " + url);
-            //System.out.println("Post parameters : " + urlParameters);
-            //System.out.println("Response Code : " + responseCode);
+            System.out.println("-------------------------------------------");
             System.out.println("Broker: Adding RESTAURANT to DB");
+            System.out.println("-------------------------------------------");
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
@@ -117,9 +113,6 @@ public class RestaurantMessageListener implements MessageListener {
                 response.append(inputLine);
             }
             in.close();
-
-            //print result
-            //System.out.println(response.toString());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -146,11 +139,9 @@ public class RestaurantMessageListener implements MessageListener {
             wr.flush();
             wr.close();
 
-            int responseCode = con.getResponseCode();
-            //System.out.println("\nSending 'POST' request to URL : " + url);
-            //System.out.println("Post parameters : " + urlParameters);
-            //System.out.println("Response Code : " + responseCode);
+            System.out.println("-------------------------------------------");
             System.out.println("Broker: Adding RESERVATION_REPLY to DB");
+            System.out.println("-------------------------------------------");
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
@@ -161,9 +152,6 @@ public class RestaurantMessageListener implements MessageListener {
                 response.append(inputLine);
             }
             in.close();
-
-            //print result
-            //System.out.println(response.toString());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -186,11 +174,6 @@ public class RestaurantMessageListener implements MessageListener {
                     + "\",\"time\":\"" + reservationValuePair.getRequest().getTime() + ""
                     + "\",\"answer\":\"" + reservationValuePair.getReply().getAnswer() + ""
                     + "\",\"replyTime\":\"" + reservationValuePair.getReply().getTime() + "\"}";
-            
-            /*
-            String urlParameters = "{\"answer\":\"" + reservationValuePair.getRequest()+ ""
-                    + "\",\"time\":\"" + reservationValuePair.getReply()+ "\"}";
-            */
 
             // Send post request
             con.setDoOutput(true);
@@ -199,11 +182,9 @@ public class RestaurantMessageListener implements MessageListener {
             wr.flush();
             wr.close();
 
-            int responseCode = con.getResponseCode();
-            //System.out.println("\nSending 'POST' request to URL : " + url);
-            //System.out.println("Post parameters : " + urlParameters);
-            //System.out.println("Response Code : " + responseCode);
+            System.out.println("-------------------------------------------");
             System.out.println("Broker: Adding RESERVATION_REPLY to DB");
+            System.out.println("-------------------------------------------");
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
@@ -214,9 +195,6 @@ public class RestaurantMessageListener implements MessageListener {
                 response.append(inputLine);
             }
             in.close();
-
-            //print result
-            //System.out.println(response.toString());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

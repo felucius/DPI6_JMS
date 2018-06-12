@@ -5,15 +5,13 @@
  */
 package service;
 
-import domain.ReservationReply;
-import domain.ReservationRequest;
 import domain.Restaurant;
-import java.util.HashMap;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import jmsmessaging.MessageReceiver;
+import jmsmessaging.BrokerMessageListener;
+import jmsmessaging.MessageReceiverGateway;
 import jmsmessaging.MessageSender;
 
 /**
@@ -36,12 +34,7 @@ public class init {
     @PostConstruct
     public void init() {
         Restaurant restaurant = new Restaurant("Alesandro Pizza & Pasta", "Geldrop", 50);
-        //ReservationRequest reservationRequest = new ReservationRequest("Maxime", 11, 2);
-        //ReservationReply reservationReply = new ReservationReply("yes", 11);
-
         restaurantService.insertRestaurant(restaurant);
-        //reservationRequestService.insertReservation(reservationRequest);
-        //reservationReplyService.insertReservationReply(reservationReply);
 
         sendRestaurantInformation();
         connectToBroker();
@@ -55,6 +48,7 @@ public class init {
     }
 
     public void connectToBroker() {
-        MessageReceiver receiver = new MessageReceiver();
+        MessageReceiverGateway brokerToRestaurantReceiver = new MessageReceiverGateway("FromBrokerToRestaurantAPI1");
+        brokerToRestaurantReceiver.setListener(new BrokerMessageListener());
     }
 }

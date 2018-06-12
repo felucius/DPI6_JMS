@@ -1,6 +1,5 @@
 package messaging;
 
-import domain.ReservationRequest;
 import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.Properties;
@@ -17,10 +16,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import domain.ReservationRequest;
 
-/*
-This class sends a message to the Broker application that is needed for the Bank
-application.
-*/
 public class MessageSender {
 
     private Connection connection = null;
@@ -30,18 +25,13 @@ public class MessageSender {
     
     private HashMap<String, ReservationRequest> correlations = new HashMap();
 
-    public MessageSender(){//HashMap<String, ReservationRequest> correlations) {
+    public MessageSender(){
         this.correlations = correlations;
         try {
-            // Creating properties to connect with ActiveMQ and it's URL.
             Properties properties = new Properties();
             properties.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
             properties.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
 
-            /* 
-            Location of the queue where the message will be stored. In this case
-            the Broker or FromClientToBroker.
-             */
             properties.put(("queue.FromReservationClientToBroker"), "FromReservationClientToBroker");
 
             /*
@@ -67,17 +57,8 @@ public class MessageSender {
         }
     }
 
-    /**
-     * This method allows a client to send a loanrequest to the Broker application.
-     * @param reservationRequest is the loanrequest the Client GUI has entered.
-     */
-    public void send(ReservationRequest reservationRequest) {
+    public void sendReservationRequest(ReservationRequest reservationRequest) {
         try {
-            /*
-            Send the loanRequest to ActiveMQ in Json format and adding the 
-            correlation ID of the loanrequest to check later on for the reply
-            of the Bank application.
-            */
             Message message = session.createTextMessage(new Gson().toJson(reservationRequest));
             producer.send(message);
             correlations.put(message.getJMSMessageID(), reservationRequest);

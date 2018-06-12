@@ -33,8 +33,9 @@ public class ReservationRequestService implements Serializable {
     }
 
     public Boolean insertReservation(ReservationRequest reservationRequest) throws PersistenceException {
+        // Sends reservation request to restaurant
         MessageSender sender = new MessageSender();
-        sender.send(reservationRequest);
+        sender.sendReservationRequest(reservationRequest);
 
         return reservationRequestDAO.insertReservation(reservationRequest);
     }

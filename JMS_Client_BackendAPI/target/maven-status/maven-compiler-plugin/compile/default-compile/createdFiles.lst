@@ -10,7 +10,6 @@ dao\ReservationReplyDAO.class
 domain\Restaurant.class
 rest\ReservationRequestReplyRest.class
 rest\ReservationReplyRest.class
-messaging\ReservationRequestReply.class
 service\ReservationRequestReplyService.class
 messaging\BrokerMessageListener.class
 rest\ReservationRequestRest.class
@@ -18,9 +17,10 @@ messaging\MessageReceiver.class
 messaging\MessageSender.class
 rest\JAXRSconfig.class
 domain\ReservationRequest.class
+domain\ReservationRequestReply.class
 dao\ReservationRequestDAO.class
 dao\ReservationRequestReplyImpl.class
-messaging\ReservationValuePair.class
 dao\RestaurantDAO.class
 rest\RestaurantRest.class
+domain\ReservationValuePair.class
 service\RestaurantService.class

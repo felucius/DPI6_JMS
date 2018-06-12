@@ -11,8 +11,8 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 import messaging.ClientMessageListener;
 import messaging.RestaurantMessageListener;
-import jms.MessageReceiverGateway;
-import monitoring.Parser;
+import gateway.MessageReceiverGateway;
+import monitoring.Monitor;
 
 /**
  *
@@ -33,15 +33,6 @@ public class init {
 
     @PostConstruct
     public void init() {
-        /*
-        Restaurant restaurant = new Restaurant("Alesandro Pizza & Pasta", "Geldrop", 50);
-        ReservationRequest reservationRequest = new ReservationRequest("Maxime", 11, 2);
-        ReservationReply reservationReply = new ReservationReply("yes", 11);
-        
-        restaurantService.insertRestaurant(restaurant);
-        reservationRequestService.insertReservation(reservationRequest);
-        reservationReplyService.insertReservationReply(reservationReply);
-         */
         connectToRestaurantAPI1();
         connectToRestaurantAPI2();
         connectToRestaurantAPI3();
@@ -70,6 +61,6 @@ public class init {
     }
     
     public void connectToMonitor() {
-        Parser monitorParser = new Parser();
+        Monitor monitorParser = new Monitor();
     }
 }

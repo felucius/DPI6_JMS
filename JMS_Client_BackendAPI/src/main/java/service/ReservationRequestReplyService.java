@@ -11,7 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
-import messaging.ReservationRequestReply;
+import domain.ReservationRequestReply;
 
 /**
  *

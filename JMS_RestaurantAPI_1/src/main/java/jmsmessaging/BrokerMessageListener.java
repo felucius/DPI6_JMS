@@ -1,5 +1,6 @@
 package jmsmessaging;
 
+import domain.ReservationValuePair;
 import com.google.gson.Gson;
 import domain.ReservationReply;
 import domain.ReservationRequest;
@@ -14,11 +15,11 @@ import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
 public class BrokerMessageListener implements MessageListener {
-
-    private MessageSender sender;
+    
+    private MessageSender messageSender;
     
     public BrokerMessageListener() {
-        sender = new MessageSender();
+        this.messageSender = new MessageSender();
     }
 
     @Override
@@ -28,9 +29,11 @@ public class BrokerMessageListener implements MessageListener {
             TextMessage message = (TextMessage) msg;
             ReservationRequest request = new Gson().fromJson(message.getText(), ReservationRequest.class);
 
+            System.out.println("-------------------------------------------");
             System.out.println("Restaurant API 1: Restaurant received: " + request.getName()
                     + " - Amount of seats: " + request.getAmountOfSeats()
                     + " - Time:" + request.getTime());
+            System.out.println("-------------------------------------------");
 
             ReservationReply reply = getReservationReply();
             addReservationReply(reply);
@@ -65,11 +68,9 @@ public class BrokerMessageListener implements MessageListener {
             wr.flush();
             wr.close();
 
-            int responseCode = con.getResponseCode();
-            //System.out.println("\nSending 'POST' request to URL : " + url);
-            //System.out.println("Post parameters : " + urlParameters);
-            //System.out.println("Response Code : " + responseCode);
+            System.out.println("-------------------------------------------");
             System.out.println("Restaurant API 1: Adding RESERVATION_REPLY to DB");
+            System.out.println("-------------------------------------------");
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
@@ -101,10 +102,6 @@ public class BrokerMessageListener implements MessageListener {
             //add request header
             con.setRequestProperty("User-Agent", "Chrome");
 
-            int responseCode = con.getResponseCode();
-            //System.out.println("\nSending 'GET' request to URL : " + url);
-            //System.out.println("Response Code : " + responseCode);
-
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;
@@ -118,14 +115,14 @@ public class BrokerMessageListener implements MessageListener {
                 String time = responses[2].substring(0, 2);
 
                 reply = new ReservationReply(answer, Integer.valueOf(time));
-
                 response.append(inputLine);
-                //System.out.println("response: " + responses.length);
             }
             in.close();
 
             //print result
+            System.out.println("-------------------------------------------");
             System.out.println("Restaurant API 1: Answer: " + response.toString());
+            System.out.println("-------------------------------------------");
 
             return reply;
 
@@ -136,10 +133,10 @@ public class BrokerMessageListener implements MessageListener {
     }
 
     public void sendReplyToBroker(ReservationReply reply) {
-        sender.sendRestaurantReply(reply);
+        messageSender.sendRestaurantReply(reply);
     }
 
     public void sendReservationValuePairToBroker(ReservationValuePair reservationValuePair) {
-        sender.sendReservationValuePairToBroker(reservationValuePair);
+        messageSender.sendReservationValuePairToBroker(reservationValuePair);
     }
 }

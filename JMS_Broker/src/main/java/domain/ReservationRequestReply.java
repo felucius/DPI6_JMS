@@ -42,9 +42,6 @@ public class ReservationRequestReply implements Serializable {
     // Properties for reservation reply
     private String answer;
     private Integer replyTime;
-    
-    //private ReservationRequest request;
-    //private ReservationReply reply;
 
     public ReservationRequestReply() {
 

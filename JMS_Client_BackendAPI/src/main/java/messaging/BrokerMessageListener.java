@@ -1,12 +1,12 @@
 package messaging;
 
+import domain.ReservationValuePair;
 import com.google.gson.Gson;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 import domain.ReservationReply;
-//import service.StoreReservationReplyDB;
 import domain.Restaurant;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -22,24 +22,29 @@ public class BrokerMessageListener implements MessageListener {
     @Override
     public void onMessage(Message msg) {
         try {
+            System.out.println("-------------------------------------------");
             System.out.println("Client: Received a reply from a restaurant");
+            System.out.println("-------------------------------------------");
+            
             TextMessage message = (TextMessage) msg;
-            //ReservationReply reply = new Gson().fromJson(message.getText(), ReservationReply.class);
             Restaurant restaurant = new Gson().fromJson(message.getText(), Restaurant.class);
-            //ReservationReply reply = new Gson().fromJson(message.getText(), ReservationReply.class);
-
             ReservationValuePair reservationValuePair = new Gson().fromJson(message.getText(), ReservationValuePair.class);
 
             if (reservationValuePair.getReply() != null) {
                 //addReservationReply(reply);
                 addReservationValuePairToDB(reservationValuePair);
+                
+                System.out.println("-------------------------------------------");
                 System.out.println("Reply from restaurant: " + reservationValuePair.getReply().getAnswer()
                         + " time: " + reservationValuePair.getReply().getTime());
+                System.out.println("-------------------------------------------");
             } else {
                 addRestaurant(restaurant);
+                System.out.println("-------------------------------------------");
                 System.out.println("Client: Restaurant received: " + restaurant.getName()
                         + " - location: " + restaurant.getLocation()
                         + " - Amount of seats:" + restaurant.getAmountOfSeats());
+                System.out.println("-------------------------------------------");
             }
         } catch (JMSException ex) {
             ex.printStackTrace();
@@ -68,11 +73,9 @@ public class BrokerMessageListener implements MessageListener {
             wr.flush();
             wr.close();
 
-            int responseCode = con.getResponseCode();
-            //System.out.println("\nSending 'POST' request to URL : " + url);
-            //System.out.println("Post parameters : " + urlParameters);
-            //System.out.println("Response Code : " + responseCode);
+            System.out.println("-------------------------------------------");
             System.out.println("Client: Adding restaurant to DB");
+            System.out.println("-------------------------------------------");
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
@@ -83,9 +86,6 @@ public class BrokerMessageListener implements MessageListener {
                 response.append(inputLine);
             }
             in.close();
-
-            //print result
-            //System.out.println(response.toString());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -98,7 +98,7 @@ public class BrokerMessageListener implements MessageListener {
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
-            //add reuqest header
+            //add reqest header
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-type", "application/json");
 
@@ -112,11 +112,9 @@ public class BrokerMessageListener implements MessageListener {
             wr.flush();
             wr.close();
 
-            int responseCode = con.getResponseCode();
-            //System.out.println("\nSending 'POST' request to URL : " + url);
-            //System.out.println("Post parameters : " + urlParameters);
-            //System.out.println("Response Code : " + responseCode);
+            System.out.println("-------------------------------------------");
             System.out.println("Client: Adding reservation reply to DB");
+            System.out.println("-------------------------------------------");
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
@@ -127,9 +125,6 @@ public class BrokerMessageListener implements MessageListener {
                 response.append(inputLine);
             }
             in.close();
-
-            //print result
-            //System.out.println(response.toString());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -153,10 +148,6 @@ public class BrokerMessageListener implements MessageListener {
                     + "\",\"answer\":\"" + reservationValuePair.getReply().getAnswer() + ""
                     + "\",\"replyTime\":\"" + reservationValuePair.getReply().getTime() + "\"}";
 
-            /*
-            String urlParameters = "{\"answer\":\"" + reservationValuePair.getRequest()+ ""
-                    + "\",\"time\":\"" + reservationValuePair.getReply()+ "\"}";
-             */
             // Send post request
             con.setDoOutput(true);
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
@@ -164,11 +155,9 @@ public class BrokerMessageListener implements MessageListener {
             wr.flush();
             wr.close();
 
-            int responseCode = con.getResponseCode();
-            //System.out.println("\nSending 'POST' request to URL : " + url);
-            //System.out.println("Post parameters : " + urlParameters);
-            //System.out.println("Response Code : " + responseCode);
+            System.out.println("-------------------------------------------");
             System.out.println("Broker: Adding RESERVATION_REPLY to DB");
+            System.out.println("-------------------------------------------");
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
@@ -179,9 +168,6 @@ public class BrokerMessageListener implements MessageListener {
                 response.append(inputLine);
             }
             in.close();
-
-            //print result
-            //System.out.println(response.toString());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

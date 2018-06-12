@@ -10,7 +10,7 @@ import java.net.URL;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
-import jms.MessageSenderGateway;
+import gateway.MessageSenderGateway;
 import domain.ReservationRequest;
 
 /*
@@ -30,7 +30,6 @@ public class ClientMessageListener implements MessageListener {
 
             TextMessage message = (TextMessage) msg;
             ReservationRequest reservationRequest = new Gson().fromJson(message.getText(), ReservationRequest.class);
-            //frame.add(restaurantRequest);
 
             MessageSenderGateway messageSenderGatewayAPI1 = new MessageSenderGateway("FromBrokerToRestaurantAPI1");
             MessageSenderGateway messageSenderGatewayAPI2 = new MessageSenderGateway("FromBrokerToRestaurantAPI2");
@@ -47,11 +46,13 @@ public class ClientMessageListener implements MessageListener {
                 addReservationRequest(reservationRequest);
             }
 
+            System.out.println("-------------------------------------------");
             System.out.println("Broker: Client request received: " + reservationRequest.getName()
                     + " amount of seats: " + reservationRequest.getAmountOfSeats()
                     + " time: " + reservationRequest.getTime()
                     + " restaurantName: " + reservationRequest.getRestaurantName());
             System.out.println("Broker: Sending client REQUEST to connected restaurant application.");
+            System.out.println("-------------------------------------------");
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -81,11 +82,9 @@ public class ClientMessageListener implements MessageListener {
             wr.flush();
             wr.close();
 
-            int responseCode = con.getResponseCode();
-            //System.out.println("\nSending 'POST' request to URL : " + url);
-            //System.out.println("Post parameters : " + urlParameters);
-            //System.out.println("Response Code : " + responseCode);
+            System.out.println("-------------------------------------------");
             System.out.println("Broker: Adding reservation REQUEST to DB");
+            System.out.println("-------------------------------------------");
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
@@ -96,9 +95,6 @@ public class ClientMessageListener implements MessageListener {
                 response.append(inputLine);
             }
             in.close();
-
-            //print result
-            //System.out.println(response.toString());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

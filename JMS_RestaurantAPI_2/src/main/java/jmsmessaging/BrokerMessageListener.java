@@ -1,5 +1,6 @@
 package jmsmessaging;
 
+import domain.ReservationValuePair;
 import com.google.gson.Gson;
 import domain.ReservationReply;
 import domain.ReservationRequest;
@@ -66,9 +67,6 @@ public class BrokerMessageListener implements MessageListener {
             wr.close();
 
             int responseCode = con.getResponseCode();
-            //System.out.println("\nSending 'POST' request to URL : " + url);
-            //System.out.println("Post parameters : " + urlParameters);
-            //System.out.println("Response Code : " + responseCode);
             System.out.println("Restaurant API 1: Adding RESERVATION_REPLY to DB");
 
             BufferedReader in = new BufferedReader(
@@ -102,8 +100,6 @@ public class BrokerMessageListener implements MessageListener {
             con.setRequestProperty("User-Agent", "Chrome");
 
             int responseCode = con.getResponseCode();
-            //System.out.println("\nSending 'GET' request to URL : " + url);
-            //System.out.println("Response Code : " + responseCode);
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
@@ -120,7 +116,6 @@ public class BrokerMessageListener implements MessageListener {
                 reply = new ReservationReply(answer, Integer.valueOf(time));
 
                 response.append(inputLine);
-                //System.out.println("response: " + responses.length);
             }
             in.close();
 

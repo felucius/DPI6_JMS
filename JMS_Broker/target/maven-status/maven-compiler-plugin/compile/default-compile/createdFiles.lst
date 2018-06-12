@@ -1,11 +1,10 @@
-monitoring\Parser.class
 monitoring\Stats.class
 service\init.class
-jms\MessageSenderGateway.class
 dao\ReservationRequestDAOImpl.class
 domain\ReservationReply.class
 service\ReservationReplyService.class
 dao\RestaurantDAOImpl.class
+gateway\MessageSenderGateway.class
 dao\ReservationRequestReplyDAO.class
 service\ReservationRequestService.class
 dao\ReservationReplyDAOImpl.class
@@ -22,11 +21,12 @@ messaging\ClientMessageListener.class
 monitoring\Feed.class
 domain\ReservationRequestReply.class
 dao\ReservationRequestDAO.class
+gateway\MessageReceiverGateway.class
+monitoring\Monitor.class
 monitoring\Queue.class
 dao\ReservationRequestReplyImpl.class
-messaging\ReservationValuePair.class
 dao\RestaurantDAO.class
 rest\RestaurantRest.class
+domain\ReservationValuePair.class
 service\RestaurantService.class
-jms\MessageReceiverGateway.class
 messaging\RestaurantMessageListener.class

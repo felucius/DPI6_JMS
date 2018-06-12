@@ -10,7 +10,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import jmsmessaging.MessageReceiver;
+import jmsmessaging.BrokerMessageListener;
+import jmsmessaging.MessageReceiverGateway;
 import jmsmessaging.MessageSender;
 
 /**
@@ -29,16 +30,12 @@ public class init {
 
     @Inject
     ReservationReplyService reservationReplyService;
-
+    
     @PostConstruct
     public void init() {
         Restaurant restaurant = new Restaurant("Greek specialities", "Weert", 45);
-        //ReservationRequest reservationRequest = new ReservationRequest("Maxime", 11, 2);
-        //ReservationReply reservationReply = new ReservationReply("yes", 11);
 
         restaurantService.insertRestaurant(restaurant);
-        //reservationRequestService.insertReservation(reservationRequest);
-        //reservationReplyService.insertReservationReply(reservationReply);
 
         sendRestaurantInformation();
         connectToBroker();
@@ -52,6 +49,7 @@ public class init {
     }
 
     public void connectToBroker() {
-        MessageReceiver receiver = new MessageReceiver();
+        MessageReceiverGateway brokerToRestaurantReceiver = new MessageReceiverGateway("FromBrokerToRestaurantAPI3");
+        brokerToRestaurantReceiver.setListener(new BrokerMessageListener());
     }
 }

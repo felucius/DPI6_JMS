@@ -1,6 +1,5 @@
 package messaging;
 
-import domain.ReservationReply;
 import java.util.Properties;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -23,18 +22,10 @@ public class MessageReceiver {
     
     public MessageReceiver(){
         try {
-            /*
-            Creating properties to set the url mapping to ActiveMQ
-            and adding context factory from the libraries.
-            */
             Properties properties = new Properties();
             properties.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
             properties.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
 
-            /*
-            Adding the property queue to receive the message from the broker from 
-            ActiveMQ queue.
-            */
             properties.put(("queue.FromBrokerToReservationClient"), "FromBrokerToReservationClient");
 
             /*
@@ -65,10 +56,6 @@ public class MessageReceiver {
             */
             brokerMessageListener = new BrokerMessageListener();
             
-            /*
-            Consumer listening to the GUI frame to update the given reply from
-            the broker
-            */
             consumer.setMessageListener(brokerMessageListener);
         } catch (NamingException | JMSException ex) {
             ex.printStackTrace();

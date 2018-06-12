@@ -22,16 +22,18 @@ public class Queues {
         
     }
     
-    public Queues(Queue[] queue){
-        this.queue = queue;
+    public Queue[] getQueue() {
+        return queue;
     }
-    
-    public void setQueues(Queue[] queue) {
+
+    public void setQueue(Queue[] queue) {
         this.queue = queue;
     }
     
     @Override
     public String toString() {
-        return "Queues{" + "queues=" + Arrays.toString(queue) + "}";
+        return "Queues{" + 
+                "queues=" + Arrays.toString(queue) +
+                '}';
     }
 }

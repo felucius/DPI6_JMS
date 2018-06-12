@@ -1,5 +1,4 @@
 rest\ReservationRequestRest.class
-jmsmessaging\MessageReceiver.class
 jmsmessaging\BrokerMessageListener.class
 rest\JAXRSconfig.class
 domain\ReservationRequest.class
@@ -15,7 +14,8 @@ dao\ReservationReplyDAOImpl.class
 dao\ReservationReplyDAO.class
 domain\Restaurant.class
 dao\RestaurantDAO.class
+jmsmessaging\MessageReceiverGateway.class
 rest\ReservationReplyRest.class
 rest\RestaurantRest.class
+domain\ReservationValuePair.class
 service\RestaurantService.class
-jmsmessaging\ReservationValuePair.class

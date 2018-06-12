@@ -1,5 +1,6 @@
 package jmsmessaging;
 
+import domain.ReservationValuePair;
 import com.google.gson.Gson;
 import domain.ReservationReply;
 import domain.Restaurant;
@@ -16,10 +17,6 @@ import javax.naming.InitialContext;
 
 import javax.naming.NamingException;
 
-/*
-This class sends a message to the Broker application that is needed for
-the Client application.
- */
 public class MessageSender {
 
     Connection connection = null;
@@ -29,17 +26,12 @@ public class MessageSender {
 
     public MessageSender() {
         try {
-            /*
-            Creating properties to connect with ActiveMQ and with correct URL.
-             */
+
             Properties properties = new Properties();
             properties.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
             properties.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
 
-            /*
-            Sends message to the queue BankToBroker.
-             */
-            properties.put(("queue.FromRestaurantToBrokerAPI1"), "FromRestaurantToBrokerAPI1");
+            properties.put(("queue.FromRestaurantToBrokerAPI2"), "FromRestaurantToBrokerAPI2");
 
             /*
             Creating a connection factory.
@@ -54,10 +46,9 @@ public class MessageSender {
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
             /*
-            Setting the destination to send the message. In our case the Broker
-            or BankToBRoker.
+            Setting the destination to send the message.
              */
-            destination = (Destination) jndiContext.lookup("FromRestaurantToBrokerAPI1");
+            destination = (Destination) jndiContext.lookup("FromRestaurantToBrokerAPI2");
             producer = session.createProducer(destination);
 
         } catch (NamingException | JMSException ex) {
@@ -65,21 +56,10 @@ public class MessageSender {
         }
     }
 
-    /**
-     * This method sends the message to ActiveMQ with a reply from the bank and
-     * a correlationID of the message.
-     *
-     * @param reply is the reply from the bank.
-     * @param correlationId is the id that matches the request and reply.
-     */
-    public void sendRestaurantReply(ReservationReply reply) {//, String correlationId) {
+    public void sendRestaurantReply(ReservationReply reply) {
         try {
             Message message = session.createTextMessage(new Gson().toJson(reply));
-            //message.setJMSCorrelationID(correlationId);
             producer.send(message);
-
-            //session.close();
-            //connection.close();
         } catch (JMSException ex) {
             ex.printStackTrace();
         }
@@ -89,9 +69,6 @@ public class MessageSender {
         try {
             Message message = session.createTextMessage(new Gson().toJson(restaurant));
             producer.send(message);
-
-            //session.close();
-            //connection.close();
         } catch (JMSException ex) {
             ex.printStackTrace();
         }
@@ -101,9 +78,6 @@ public class MessageSender {
         try {
             Message message = session.createTextMessage(new Gson().toJson(reservationValuePair));
             producer.send(message);
-
-            //session.close();
-            //connection.close();
         } catch (JMSException ex) {
             ex.printStackTrace();
         }

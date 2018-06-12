@@ -15,12 +15,12 @@ C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\domain\Restaurant.
 C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\messaging\MessageSender.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\dao\ReservationRequestDAO.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\dao\ReservationReplyDAOImpl.java
-C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\messaging\ReservationValuePair.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\dao\RestaurantDAOImpl.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\domain\ReservationRequest.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\rest\ReservationReplyRest.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\rest\ReservationRequestReplyRest.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\dao\RestaurantDAO.java
+C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\domain\ReservationRequestReply.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\service\ReservationRequestService.java
 C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\dao\ReservationRequestReplyImpl.java
-C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\messaging\ReservationRequestReply.java
+C:\Fontys\S6\DPI6\Week 12\JMS_Client_BackendAPI\src\main\java\domain\ReservationValuePair.java

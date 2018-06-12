@@ -12,6 +12,8 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
  * @author M
  */
 public class Queue {
+    @JacksonXmlProperty(localName = "name", isAttribute = true)
+    private String name;
     @JacksonXmlProperty(localName = "stats", isAttribute = true)
     private Stats stats;
     @JacksonXmlProperty(localName = "feed", isAttribute = true)
@@ -21,11 +23,20 @@ public class Queue {
         
     }
     
-    public Queue(Stats stats, Feed feed) {
+    public Queue(String name, Stats stats, Feed feed) {
+        this.name = name;
         this.stats = stats;
         this.feed = feed;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public Stats getStats() {
         return stats;
     }
